@@ -6,9 +6,12 @@ operator fun Array<Array<Double>>.times(with: Array<Array<Double>>): Array<Array
     if (this[0].size != with.size) return null
     val result: Array<Array<Double>> = Array(this.size, { outerIndex ->
         Array(with[0].size, { innerIndex ->
-            this@times[outerIndex].reduceIndexed { index, acc, fl ->
-                acc + fl * with[index][innerIndex]
+
+            var toAccumulateTo = 0.0
+            this@times[outerIndex].forEachIndexed { index, d ->
+                toAccumulateTo += d * with[index][innerIndex]
             }
+            toAccumulateTo
         })
     })
     return result
@@ -57,6 +60,20 @@ fun <T : Number> Array<Array<T>>.print() {
         s += "||"
         println(s)
     }
+}
+
+fun Array<Double>.firstMaxIndex(): Int {
+    if (isEmpty()) return 0
+    var maxElem = this[0]
+    var maxIndex = 0
+    for (i in 1..lastIndex) {
+        val e = this[i]
+        if (maxElem < e) {
+            maxElem = e
+            maxIndex = i
+        }
+    }
+    return maxIndex
 }
 
 inline fun <T : Number, reified S : Number> Array<Array<T>>.map(operator: (T) -> S): Array<Array<S>> {

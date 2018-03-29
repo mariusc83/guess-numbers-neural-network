@@ -12,6 +12,7 @@ class DoubleExtensionsTest {
                 it.toDouble()
             })
         })
+        a.print()
         val toSubstractFrom = 5.0
         val b = toSubstractFrom - a
         assertEquals(3, b.size)

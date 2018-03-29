@@ -2,7 +2,6 @@ package util
 
 import org.junit.Test
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 
 class ArrayExtensionsTest {
 
@@ -34,9 +33,9 @@ class ArrayExtensionsTest {
     @Test
     fun testMatrixMultiplication2() {
 
-        val a = Array(3, {
+        val a = Array(3, { outerIndex ->
             Array(1, {
-                it.toDouble()
+                outerIndex.toDouble()
             })
         })
         println("current a:")
@@ -145,5 +144,16 @@ class ArrayExtensionsTest {
                 assertEquals(0.0, it, 0.0)
             }
         }
+    }
+
+    @Test
+    fun testArrayMaxIndex() {
+        val a = Array(3, {
+            it.toDouble()
+        })
+        val b = arrayOf(5.0,1.0,6.0,2.0)
+
+        assertEquals(2, a.firstMaxIndex())
+        assertEquals(2, b.firstMaxIndex())
     }
 }
